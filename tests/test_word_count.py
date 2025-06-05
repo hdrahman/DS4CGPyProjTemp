@@ -5,7 +5,6 @@ In pytest, each individual test is a python function that starts with `test`.
 
 # Import your library for testing
 from cdstemplate import word_count
-import logging
 
 
 def test_tokenize_document():
