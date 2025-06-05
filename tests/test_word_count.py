@@ -106,3 +106,11 @@ def test_corpus_counter_save_csv(tmp_path):
     assert my_csv.is_file()
     expected_csv = "token,count\na,2\nb,1\nc,1\nx,1\ny,1\nz,1\n"
     assert my_csv.read_text() == expected_csv
+
+
+def test_token_counts_are_sorted_by_frequency():
+    cc = word_count.CorpusCounter()
+    cc.add_doc("a a a b b c c")
+    df = cc.get_token_counts_as_dataframe()
+    df_sorted = df.sort_values(by="count", ascending=False).reset_index(drop=True)
+    assert df.equals(df_sorted)
