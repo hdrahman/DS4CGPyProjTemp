@@ -5,6 +5,7 @@ writes the corpus counts to a user-specified CSV file
 # Import modules, functions and classes from external libraries
 import argparse
 import logging
+import pandas as pd
 from pathlib import Path
 
 # Import the code from this project needed for this script
@@ -57,9 +58,11 @@ def main(csv_out, document_dir, case_insensitive=False):
         if i % 2 == 0:
             logger.info("Tokenizing document number %s: %s", i, doc)
             cc.add_doc(Path(doc).read_text())
-
-    cc.save_token_counts(csv_out)
-
+    df = pd.DataFrame(list(cc.token_counts.items()), columns = ["token", "count"])
+    df = df.sort_values(by="count", ascending = False)
+    df.to_csv(csv_out, index=False)
+    mostFreq = df.iloc[0]
+    logger.info("most frequent token: %s, count: %s", mostFreq["token"], mostFreq["count"])
 
 # The entry point of your script - if a user runs it from the command line, for example using `python -m <package>.<module>`
 # or `python <script_path>.py`, this is what will be run.
