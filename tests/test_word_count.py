@@ -113,4 +113,4 @@ def test_token_counts_are_sorted_by_frequency():
     cc.add_doc("a a a b b c c")
     df = cc.get_token_counts_as_dataframe()
     df_sorted = df.sort_values(by="count", ascending=False).reset_index(drop=True)
-    assert df.equals(df_sorted), "Token counts are not sorted by frequency"
+    assert df.equals(df_sorted)
