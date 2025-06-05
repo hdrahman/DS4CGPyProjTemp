@@ -6,7 +6,6 @@ In pytest, each individual test is a python function that starts with `test`.
 # Import your library for testing
 from cdstemplate import word_count
 import logging
-import pytest
 
 def test_tokenize_document():
     my_document = (
@@ -109,7 +108,6 @@ def test_corpus_counter_save_csv(tmp_path):
     assert my_csv.read_text() == expected_csv
 
 def test_most_frequent_corpus(tmp_path, caplog):
-    my_csv = tmp_path / "token_count.csv"
     cc = word_count.CorpusCounter()
     cc.add_doc("a a a b b c c")
     logger = logging.getLogger(__name__)
