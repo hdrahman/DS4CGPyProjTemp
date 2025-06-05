@@ -114,4 +114,3 @@ def test_most_frequent_corpus(tmp_path, caplog):
     assert cc.get_token_count("a") == 3
     assert cc.get_token_count("b") == 2
     assert cc.get_token_count("c") == 2
-
