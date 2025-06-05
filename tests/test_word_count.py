@@ -108,9 +108,9 @@ def test_corpus_counter_save_csv(tmp_path):
     assert my_csv.read_text() == expected_csv
 
 
-def test_most_frequent_corpus(tmp_path, caplog):
+def test_token_counts_are_sorted_by_frequency():
     cc = word_count.CorpusCounter()
     cc.add_doc("a a a b b c c")
-    assert cc.get_token_count("a") == 3
-    assert cc.get_token_count("b") == 2
-    assert cc.get_token_count("c") == 2
+    df = cc.get_token_counts_as_dataframe()
+    df_sorted = df.sort_values(by="count", ascending=False).reset_index(drop=True)
+    assert df.equals(df_sorted), "Token counts are not sorted by frequency"
