@@ -7,6 +7,7 @@ In pytest, each individual test is a python function that starts with `test`.
 from cdstemplate import word_count
 import logging
 
+
 def test_tokenize_document():
     my_document = (
         "It was all very well to say `Drink me,' but the wise little Alice was not going to do that in a hurry."
@@ -107,6 +108,7 @@ def test_corpus_counter_save_csv(tmp_path):
     expected_csv = "token,count\na,2\nb,1\nc,1\nx,1\ny,1\nz,1\n"
     assert my_csv.read_text() == expected_csv
 
+
 def test_most_frequent_corpus(tmp_path, caplog):
     cc = word_count.CorpusCounter()
     cc.add_doc("a a a b b c c")
@@ -115,4 +117,3 @@ def test_most_frequent_corpus(tmp_path, caplog):
         logger.info("most frequent token: %s, count: %s", "a", 3)
 
     assert "most frequent token: a, count: 3" in caplog.text
-
